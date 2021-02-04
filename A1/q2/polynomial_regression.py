@@ -105,9 +105,11 @@ class PolynomialRegression:
         # ====================================================
         # TODO: Implement your solution within the box
         B = np.array([train_X.T[0] ** i for i in range(self.K + 1)]).T
-        E = l2_coef * np.identity(self.K + 1)
+        # use the regularization to reduce overfitting
+        lambda_I = l2_coef * np.identity(self.K + 1)
+        A = np.dot(np.linalg.inv(np.add(np.dot(B.T, B), lambda_I)), B.T)
 
-        self.parameters = np.linalg.inv(B.T @ B + E) @ B.T @ train_Y
+        self.parameters = A @ train_Y
         # ====================================================
 
         assert self.parameters.shape == (self.K + 1, 1)

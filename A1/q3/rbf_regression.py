@@ -79,7 +79,13 @@ class RBFRegression():
 
         # ====================================================
         # TODO: Implement your solution within the box
-        
+        # first generate the matrix with needed space
+        B = np.ones((len(X), self.K + 1))
+        # use rdf function to put value into places where should not be 1
+        for i in range(self.K):
+            B[:, i + 1] = self._rbf_2d(X, i)[:, 0]
+
+        return B @ self.parameters
         # ====================================================
     
     def fit_with_l2_regularization(self, train_X, train_Y, l2_coef):
@@ -104,7 +110,15 @@ class RBFRegression():
 
         # ====================================================
         # TODO: Implement your solution within the box
-        
+        B = np.ones((len(train_X), self.K + 1))
+        for i in range(self.K):
+            B[:, i + 1] = self._rbf_2d(train_X, i)[:, 0]
+
+        # use the regularization to reduce overfitting
+        lambda_I = l2_coef * np.identity(self.K + 1)
+        A = np.dot(np.linalg.inv(np.add(np.dot(B.T, B), lambda_I)), B.T)
+
+        self.parameters = A @ train_Y
         # ====================================================
 
         assert self.parameters.shape == (self.K + 1, 1)
