@@ -8,25 +8,35 @@ Q1: Dataset Size
 - In general, if I increase the size of the training set, what can we expect about the model's
   training error? What about the test error?
 
+  The test errors are significantly decreased, but the training errors are increased.
+
 - In general, if I increase the size of the test set, what can we expect the about the model's
   training error? What about the test error?
 
-- How much data should I try to obtain if I want to build a good model?
+  If the test set size increases, then the training error will not be largely affected, but the
+  test error will be significantly reduced.
 
+- How much data should I try to obtain if I want to build a good model?
+  The test case size should not be too large or too small. Too small will make the noise have
+  a large influence on final model. If the test case size is too large, it will also lead to
+  overfitting situation. So the test case size should be in the middle and best describe
+  the functions.
 
 Q2: Model Complexity
 - In general, if the model is too simple, what can we conclude about the training and test errors?
-
+  Both the training errors and testing errors are too high
 - In general, if the model is too complex, what can we conclude about the training and test errors?
-
+  Training error is not a lot, but the test error might get increased
 - For each dataset, which (degree) model gives the best performance? How did you find out?
-
+  Degree 3 gives me the best performance. Its test error is the lowest.
 - For each dataset, what degree of polynomial do you think was used to generate the data?
-
+  Degree 3 is the best one, so we will use it to generate the data.
 
 Q3: Regularization
 - In general, what does regularization do to the weights? Note: You may want to look at the weight values.
-
+  It can help reduce the overfitting problem by decreasing the value of weights.
 - In general, if we set lambda (l2_coef) to 0, what do we get?
-
+  If 12-coef is equal to 0, then the lamba is not actually used. So the result will be same with the one
+  without using regularization.
 - In general, what does increasing lambda (l2_coef) do to our loss function?
+  It will cause a decrement on weights to solve the overfitting problem
