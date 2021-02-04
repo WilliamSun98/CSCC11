@@ -51,9 +51,10 @@ class PolynomialRegression:
         # ====================================================
         # TODO: Implement your solution within the box
         # b_k(x) = x^k in this situation, so get the matrix B
-        B = np.array([X.T[0] ** i for i in range(self.K + 1)]).T
+        B = np.array([X.T[0] ** j for j in range(self.K + 1)])
+        B_T = B.T
         
-        return np.dot(B, self.parameters)
+        return np.dot(B_T, self.parameters)
         # ====================================================
 
     def fit(self, train_X, train_Y):
@@ -76,10 +77,11 @@ class PolynomialRegression:
 
         # ====================================================
         # TODO: Implement your solution within the box
-        B = np.array([train_X.T[0] ** i for i in range(self.K + 1)]).T
+        B = np.array([train_X.T[0] ** j for j in range(self.K + 1)])
+        B_T = B.T
 
         # w = B^-1 * y
-        self.parameters = np.dot(np.linalg.pinv(B), train_Y)
+        self.parameters = np.dot(np.linalg.pinv(B_T), train_Y)
         # ====================================================
 
         assert self.parameters.shape == (self.K + 1, 1)
@@ -104,12 +106,13 @@ class PolynomialRegression:
 
         # ====================================================
         # TODO: Implement your solution within the box
-        B = np.array([train_X.T[0] ** i for i in range(self.K + 1)]).T
+        B = np.array([train_X.T[0] ** j for j in range(self.K + 1)])
+        B_T = B.T
         # use the regularization to reduce overfitting
         lambda_I = l2_coef * np.identity(self.K + 1)
-        A = np.dot(np.linalg.inv(np.add(np.dot(B.T, B), lambda_I)), B.T)
+        A = np.dot(np.linalg.inv(np.add(np.dot(B, B_T), lambda_I)), B)
 
-        self.parameters = A @ train_Y
+        self.parameters = np.dot(A, train_Y)
         # ====================================================
 
         assert self.parameters.shape == (self.K + 1, 1)
