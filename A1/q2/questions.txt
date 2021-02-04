@@ -1,0 +1,32 @@
+CSCC11 - Introduction to Machine Learning, Winter 2021, Assignment 1
+B. Chan, S. Wei, D. Fleet
+===========================================================
+
+For the following questions, please answer concisely in bullet points.
+
+Q1: Dataset Size
+- In general, if I increase the size of the training set, what can we expect about the model's
+  training error? What about the test error?
+
+- In general, if I increase the size of the test set, what can we expect the about the model's
+  training error? What about the test error?
+
+- How much data should I try to obtain if I want to build a good model?
+
+
+Q2: Model Complexity
+- In general, if the model is too simple, what can we conclude about the training and test errors?
+
+- In general, if the model is too complex, what can we conclude about the training and test errors?
+
+- For each dataset, which (degree) model gives the best performance? How did you find out?
+
+- For each dataset, what degree of polynomial do you think was used to generate the data?
+
+
+Q3: Regularization
+- In general, what does regularization do to the weights? Note: You may want to look at the weight values.
+
+- In general, if we set lambda (l2_coef) to 0, what do we get?
+
+- In general, what does increasing lambda (l2_coef) do to our loss function?
