@@ -50,7 +50,10 @@ class PolynomialRegression:
         
         # ====================================================
         # TODO: Implement your solution within the box
+        # b_k(x) = x^k in this situation, so get the matrix B
+        B = np.array([X.T[0] ** i for i in range(self.K + 1)]).T
         
+        return np.dot(B, self.parameters)
         # ====================================================
 
     def fit(self, train_X, train_Y):
@@ -73,7 +76,10 @@ class PolynomialRegression:
 
         # ====================================================
         # TODO: Implement your solution within the box
-        
+        B = np.array([train_X.T[0] ** i for i in range(self.K + 1)]).T
+
+        # w = B^-1 * y
+        self.parameters = np.dot(np.linalg.pinv(B), train_Y)
         # ====================================================
 
         assert self.parameters.shape == (self.K + 1, 1)
@@ -98,7 +104,10 @@ class PolynomialRegression:
 
         # ====================================================
         # TODO: Implement your solution within the box
-        
+        B = np.array([train_X.T[0] ** i for i in range(self.K + 1)]).T
+        E = l2_coef * np.identity(self.K + 1)
+
+        self.parameters = np.linalg.inv(B.T @ B + E) @ B.T @ train_Y
         # ====================================================
 
         assert self.parameters.shape == (self.K + 1, 1)
